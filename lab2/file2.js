@@ -27,7 +27,6 @@ catch(e)
     console.log(e.message);
   
 }
-
 };
 
 const appendData=async(filename,content)=>{
