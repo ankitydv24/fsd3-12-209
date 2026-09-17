@@ -13,6 +13,8 @@
  
  NPM - node package manager
 
+
+ ## http status codes -> res.writehead( ), res.statuscode
  - 200 -> ok
  - 201 -> created
  - 400 -> bad request
@@ -20,3 +22,22 @@
  - 403 -> forbidden
  - 404 -> not found
  - 500 -> internal server error 
+
+ ## server can send to the client
+ sewrver can send to the client 
+ 1. html contents  ->  prg2, prg3
+ 2. html file -> prg5
+ 3. json data -> prg4
+ 4. plain file
+ 5. js file
+ 6. any file to download
+ 7. etc
+
+ ## Type of informatoin -> res.writehead( ), res.sethead( )
+1. text/html -> for html file/contents
+2. text/json , application/json -> for json data
+3. text/css -> for css file/contents
+4. apllication -> for file
+5. text/plain -> for plain text file
+
+### note: .gitignor -> this files contains the list of files or folders that is not added to git , these files/folder will not push on github

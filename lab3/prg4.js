@@ -2,7 +2,7 @@ import http from "http"
 
 const server = http.createServer((req,res)=>
 {
-    res.writeHead(200,{"content-type":"application/json"});
+    res.writeHead(200,{"content-type":"text/json"});
 
      console.log("Client ULR:",req.url);
     const product=
@@ -18,7 +18,15 @@ const server = http.createServer((req,res)=>
         "price": 430000,
         "qty": 2,
         "discount": 15,
+    },
+    {
+        "name":"samsung",
+        "price": 43000,
+        "qty": 2,
+        "discount": 15,
+
     }
+
     ];
     res.end(JSON.stringify(product));
       });
