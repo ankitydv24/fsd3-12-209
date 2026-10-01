@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lenovo IdeaPad Slim 3</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        /* NAVBAR */
+        nav {
+            height: 80px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            color: white;
+        }
+
+        .logo {
+            background: #e2231a;
+            padding: 10px 20px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 45px;
+            margin-left: 220px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .icons {
+            margin-left: auto;
+            display: flex;
+            gap: 25px;
+            font-size: 22px;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 530px;
+            background: linear-gradient(110deg, #f1f4ff, #ffffff, #f4edff);
+            display: flex;
+            align-items: center;
+            padding: 50px 75px;
+        }
+
+        .hero-content {
+            width: 45%;
+        }
+
+        .product-name {
+            color: #e2231a;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 19px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .price {
+            color: #e2231a;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            color: #555;
+            text-decoration: line-through;
+            font-size: 20px;
+            margin-left: 15px;
+        }
+
+        .discount {
+            background: #e2231a;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 13px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+
+        .buy {
+            background: #e2231a;
+            color: white;
+            border: none;
+        }
+
+        .video {
+            background: white;
+            border: 1px solid #111;
+        }
+
+        .benefits {
+            display: flex;
+            gap: 45px;
+            margin-top: 45px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .benefit-icon {
+            font-size: 28px;
+        }
+
+        .benefit strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* LAPTOP IMAGE */
+        .hero-image {
+            width: 55%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 90%;
+            max-width: 700px;
+        }
+
+        /* SPECS */
+        .specs {
+            background: white;
+            padding: 35px 60px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .spec {
+            padding: 0 30px;
+            border-right: 1px solid #ddd;
+            flex: 1;
+        }
+
+        .spec:last-child {
+            border-right: none;
+        }
+
+        .spec h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .spec p {
+            color: #444;
+        }
+
+        /* WHY LENOVO */
+        .why {
+            padding: 40px 75px;
+            background: white;
+        }
+
+        .why h2 {
+            font-size: 27px;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: flex;
+            gap: 0;
+        }
+
+        .feature {
+            width: 25%;
+            padding: 15px 30px;
+            border-right: 1px solid #ddd;
+        }
+
+        .feature:last-child {
+            border-right: none;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            color: #e2231a;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* PROMO */
+        .promo {
+            margin: 10px 75px 50px;
+            background: #f2f4f9;
+            border-radius: 15px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .promo-text {
+            width: 50%;
+        }
+
+        .promo h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .promo p {
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .explore {
+            background: #e2231a;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            font-weight: bold;
+        }
+
+        .promo img {
+            width: 350px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                padding: 40px 25px;
+            }
+
+            .hero-content,
+            .hero-image {
+                width: 100%;
+            }
+
+            .hero-image {
+                margin-top: 30px;
+            }
+
+            .specs,
+            .features {
+                flex-wrap: wrap;
+            }
+
+            .spec {
+                width: 50%;
+                margin-bottom: 20px;
+            }
+
+            .feature {
+                width: 50%;
+                margin-bottom: 25px;
+            }
+
+            .promo {
+                margin: 20px;
+                flex-direction: column;
+            }
+
+            .promo-text {
+                width: 100%;
+            }
+
+            .promo img {
+                width: 80%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+
+        <div class="logo">
+            Lenovo
+        </div>
+
+        <div class="nav-links">
+            <a href="#">HOME</a>
+            <a href="#">PRODUCTS</a>
+            <a href="#">DEALS</a>
+            <a href="#">SUPPORT</a>
+            <a href="#">ABOUT US</a>
+        </div>
+
+        <div class="icons">
+            <span>⌕</span>
+            <span>♙</span>
+            <span>🛒</span>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="product-name">
+                Lenovo IdeaPad Slim 3
+            </div>
+
+            <h1>
+                Powerful Performance.<br>
+                Everyday Confidence.
+            </h1>
+
+            <p class="description">
+                Sleek, lightweight and built for the modern world.
+                Experience speed, style and reliability with Lenovo.
+            </p>
+
+            <div>
+                <span class="price">₹54,990</span>
+
+                <span class="old-price">
+                    ₹64,990
+                </span>
+
+                <span class="discount">
+                    15% OFF
+                </span>
+            </div>
+
+            <div class="buttons">
+
+                <button class="buy">
+                    🛒 BUY NOW
+                </button>
+
+                <button class="video">
+                    ▶ WATCH VIDEO
+                </button>
+
+            </div>
+
+            <div class="benefits">
+
+                <div class="benefit">
+                    <span class="benefit-icon">♢</span>
+
+                    <div>
+                        <strong>1 Year</strong>
+                        Warranty
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="benefit-icon">🚚</span>
+
+                    <div>
+                        <strong>Free</strong>
+                        Delivery
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="benefit-icon">→</span>
+
+                    <div>
+                        <strong>7 Days</strong>
+                        Easy Returns
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP -->
+
+        <div class="hero-image">
+
+            <img
+                src="https://p3-ofp.static.pub/fes/cms/2024/01/18/5j0x9g7z7zqf5j3h7z6r6.png"
+                alt="Lenovo Laptop"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- SPECIFICATIONS -->
+
+    <section class="specs">
+
+        <div class="spec">
+            <h3>13th Gen Intel®</h3>
+            <p>Core™ i5-1335U</p>
+        </div>
+
+        <div class="spec">
+            <h3>16GB</h3>
+            <p>RAM</p>
+        </div>
+
+        <div class="spec">
+            <h3>512GB</h3>
+            <p>SSD Storage</p>
+        </div>
+
+        <div class="spec">
+            <h3>15.6" FHD</h3>
+            <p>Anti-glare Display</p>
+        </div>
+
+        <div class="spec">
+            <h3>Intel® Iris® Xe</h3>
+            <p>Graphics</p>
+        </div>
+
+        <div class="spec">
+            <h3>Up to 8 Hours</h3>
+            <p>Battery Life</p>
+        </div>
+
+    </section>
+
+
+    <!-- WHY LENOVO -->
+
+    <section class="why">
+
+        <h2>
+            Why Choose Lenovo
+        </h2>
+
+        <div class="features">
+
+            <div class="feature">
+
+                <div class="feature-icon">◉</div>
+
+                <h3>
+                    Powerful Performance
+                </h3>
+
+                <p>
+                    Latest Intel processors for smooth
+                    multitasking and productivity.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">♧</div>
+
+                <h3>
+                    Sleek & Portable
+                </h3>
+
+                <p>
+                    Thin, lightweight design that goes
+                    wherever you go.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">♢</div>
+
+                <h3>
+                    Reliable & Durable
+                </h3>
+
+                <p>
+                    Built to last with trusted Lenovo
+                    quality and engineering.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">▣</div>
+
+                <h3>
+                    All-day Battery
+                </h3>
+
+                <p>
+                    Stay unplugged longer with optimized
+                    battery performance.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROMOTIONAL SECTION -->
+
+    <section class="promo">
+
+        <div class="promo-text">
+
+            <h2>
+                Made for Work.<br>
+                Built for You.
+            </h2>
+
+            <p>
+                From work to entertainment, the IdeaPad
+                Slim 3 is your perfect everyday companion.
+            </p>
+
+            <button class="explore">
+                EXPLORE MORE
+            </button>
+
+        </div>
+
+        <img
+            src="https://p3-ofp.static.pub/fes/cms/2024/01/18/5j0x9g7z7zqf5j3h7z6r6.png"
+            alt="Lenovo IdeaPad"
+        >
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Lenovo. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
