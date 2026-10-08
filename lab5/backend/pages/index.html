@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Academy - Unlock Your Academic Potential</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .active-tab {
+            color: #4f46e5 !important;
+            font-weight: 700;
+            border-bottom: 2px solid #4f46e5;
+        }
+        .mobile-active-tab {
+            background-color: #eef2ff;
+            color: #4f46e5 !important;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between antialiased">
+
+<!-- HEADER & STICKY NAVBAR -->
+<header class="sticky top-0 z-40 w-full glass border-b border-slate-200/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="switchPage('home')">
+                <div class="w-11 h-11 bg-gradient-to-tr from-brand-600 to-indigo-400 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-extrabold bg-gradient-to-r from-brand-700 to-indigo-500 bg-clip-text text-transparent">Apex Academy</span>
+                    <span class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 -mt-1">Online Learning</span>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn py-2 hover:text-brand-600 transition-colors">Home</button>
+                <button onclick="switchPage('courses')" id="nav-courses" class="nav-btn py-2 hover:text-brand-600 transition-colors">Courses</button>
+                <button onclick="switchPage('about')" id="nav-about" class="nav-btn py-2 hover:text-brand-600 transition-colors">About Us</button>
+                <button onclick="switchPage('resources')" id="nav-resources" class="nav-btn py-2 hover:text-brand-600 transition-colors">Resources</button>
+                <a href="contact.html" onclick="switchPage('contact')" id="nav-contact" class="nav-btn py-2 hover:text-brand-600 transition-colors">Contact Us</a>
+            </nav>
+
+            <!-- Action Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="openModal('demoModal')" class="bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-brand-500/20 hover:shadow-lg hover:shadow-brand-500/30 transition-all transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-rocket mr-2"></i> Book Free Trial
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-100 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white/95 px-4 pt-3 pb-6 space-y-2 shadow-xl">
+        <button onclick="switchPage('home'); toggleMobileMenu()" id="mob-nav-home" class="mob-nav-btn w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-indigo-50">Home</button>
+        <button onclick="switchPage('courses'); toggleMobileMenu()" id="mob-nav-courses" class="mob-nav-btn w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-indigo-50">Courses</button>
+        <button onclick="switchPage('about'); toggleMobileMenu()" id="mob-nav-about" class="mob-nav-btn w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-indigo-50">About Us</button>
+        <button onclick="switchPage('resources'); toggleMobileMenu()" id="mob-nav-resources" class="mob-nav-btn w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-indigo-50">Resources</button>
+        <button onclick="switchPage('contact'); toggleMobileMenu()" id="mob-nav-contact" class="mob-nav-btn w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-indigo-50">Contact Us</button>
+        <div class="pt-2">
+            <button onclick="openModal('demoModal'); toggleMobileMenu()" class="w-full bg-brand-600 text-white font-semibold py-3 rounded-xl text-center shadow-md">
+                <i class="fa-solid fa-rocket mr-2"></i> Book Free Trial
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- MAIN CONTENT WRAPPER -->
+<main class="flex-grow">
+
+    <!-- PAGE 1: HOME PAGE -->
+    <section id="page-home" class="page-content">
+        <!-- Hero Section -->
+        <div class="relative overflow-hidden bg-gradient-to-b from-indigo-50/60 via-slate-50 to-white pt-12 pb-20 md:pt-20 md:pb-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-100 text-brand-700 border border-brand-200">
+                            <i class="fa-solid fa-sparkles text-amber-500"></i> Admissions Open For 2026-27 Batch
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                            Unlock Your <span class="bg-gradient-to-r from-brand-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Academic Potential</span> With Apex Coaching
+                        </h1>
+                        <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal">
+                            Master complex subjects with India’s top educators. Interactive live classes, personalized study plans, and rigorous 1-on-1 doubt solving designed to secure top ranks.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <button onclick="switchPage('courses')" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg shadow-brand-500/30 transition-all hover:-translate-y-0.5">
+                                Explore Courses <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                            <button onclick="openModal('demoModal')" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-bold rounded-xl shadow-sm transition-all hover:border-slate-400">
+                                <i class="fa-regular fa-calendar-check text-brand-600 mr-2"></i> Book Free Trial
+                            </button>
+                        </div>
+                        <div class="pt-6 flex items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 font-semibold">
+                            <span><i class="fa-solid fa-check text-emerald-500 mr-1"></i> No Credit Card Required</span>
+                            <span><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Free Study Notes</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hero Visual Card -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-br from-brand-600 to-purple-700 rounded-3xl p-1 shadow-2xl shadow-indigo-300 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                            <div class="bg-white rounded-[22px] overflow-hidden p-6 space-y-6">
+                                <div class="relative h-64 rounded-xl overflow-hidden bg-slate-900 group">
+                                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Students studying" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" onerror="this.src='https://placehold.co/800x500/4f46e5/ffffff?text=Apex+Interactive+Class'">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 animate-pulse">
+                                        <span class="w-2 h-2 rounded-full bg-white"></span> LIVE CLASS NOW
+                                    </span>
+                                </div>
+                                <div class="bg-indigo-50/80 rounded-2xl p-4 border border-indigo-100 flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center text-white text-xl">
+                                        <i class="fa-solid fa-trophy"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold uppercase text-brand-600 tracking-wider">Proven Excellence</p>
+                                        <p class="text-sm font-bold text-slate-800">98.4% Top Rank Qualification in 2025</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Counter Section -->
+        <div class="bg-brand-900 text-white py-12 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="space-y-1">
+                        <div class="text-3xl md:text-5xl font-extrabold text-indigo-300"><span class="counter" data-target="15000">15,000</span>+</div>
+                        <p class="text-slate-300 text-sm font-medium">Active Students</p>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-3xl md:text-5xl font-extrabold text-indigo-300"><span class="counter" data-target="98">98</span>%</div>
+                        <p class="text-slate-300 text-sm font-medium">Success Rate</p>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-3xl md:text-5xl font-extrabold text-indigo-300"><span class="counter" data-target="65">65</span>+</div>
+                        <p class="text-slate-300 text-sm font-medium">Expert Educators</p>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-3xl md:text-5xl font-extrabold text-indigo-300"><span class="counter" data-target="120">120</span>+</div>
+                        <p class="text-slate-300 text-sm font-medium">Interactive Courses</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- "Why Choose Us" Section -->
+        <div class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-2">Why Choose Apex Academy</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Designed For Real Academic Breakthroughs</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">Live Interactive Classes</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Engage in dual-educator live classrooms with instant polling, digital whiteboards, and quizzes.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">Personalized Mentorship</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Dedicated academic mentors to guide weekly goals, monitor progress, and keep you motivated.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">Mock Tests & Analytics</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">AI-driven performance reports highlighting strengths, speed analysis, and areas needing drill down.</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-comments text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">24/7 Doubt Solving</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Snap a photo of any tough problem and receive step-by-step video solutions within minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Courses Preview Grid -->
+        <div class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                    <div>
+                        <h2 class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-2">Top Programs</h2>
+                        <h3 class="text-3xl font-extrabold text-slate-900">Featured Classroom Courses</h3>
+                    </div>
+                    <button onclick="switchPage('courses')" class="mt-4 md:mt-0 text-brand-600 font-bold hover:text-brand-700 flex items-center gap-2 group">
+                        View All Courses <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Featured Course 1 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80" alt="JEE Main & Advanced" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/4f46e5/ffffff?text=JEE+Main+%26+Advanced'">
+                            <span class="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">Competitive Exam</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center text-xs text-slate-500 mb-2">
+                                    <span><i class="fa-regular fa-clock text-brand-600 mr-1"></i> 1 Year Program</span>
+                                    <span class="text-amber-500 font-bold"><i class="fa-solid fa-star mr-1"></i> 4.9 (1.2k)</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">IIT-JEE Main & Advanced 2026 Batch</h4>
+                                <p class="text-slate-600 text-sm mb-4 line-clamp-2">Comprehensive syllabus coverage with 600+ hours of live teaching, test series, and doubt sessions.</p>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between pt-4 border-t border-slate-100 mb-4">
+                                    <span class="text-2xl font-extrabold text-slate-900">$499 <span class="text-xs text-slate-400 font-normal line-through">$799</span></span>
+                                    <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded">37% OFF</span>
+                                </div>
+                                <button onclick="openCourseModal(1)" class="w-full py-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold rounded-xl transition-colors">
+                                    View Syllabus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Course 2 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="NEET Medical Prep" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/4f46e5/ffffff?text=NEET+Medical+Prep'">
+                            <span class="absolute top-3 left-3 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">Medical Entrance</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center text-xs text-slate-500 mb-2">
+                                    <span><i class="fa-regular fa-clock text-brand-600 mr-1"></i> 2 Years Program</span>
+                                    <span class="text-amber-500 font-bold"><i class="fa-solid fa-star mr-1"></i> 4.8 (980)</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">NEET UG Medical Pinnacle 2026-27</h4>
+                                <p class="text-slate-600 text-sm mb-4 line-clamp-2">Complete Physics, Chemistry, and Biology mastery with NCERT high-yield focus and 3D diagrams.</p>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between pt-4 border-t border-slate-100 mb-4">
+                                    <span class="text-2xl font-extrabold text-slate-900">$599 <span class="text-xs text-slate-400 font-normal line-through">$899</span></span>
+                                    <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded">33% OFF</span>
+                                </div>
+                                <button onclick="openCourseModal(2)" class="w-full py-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold rounded-xl transition-colors">
+                                    View Syllabus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Course 3 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="Fullstack Coding" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/4f46e5/ffffff?text=Fullstack+Coding'">
+                            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">Coding & CS</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center text-xs text-slate-500 mb-2">
+                                    <span><i class="fa-regular fa-clock text-brand-600 mr-1"></i> 6 Months</span>
+                                    <span class="text-amber-500 font-bold"><i class="fa-solid fa-star mr-1"></i> 4.95 (2.1k)</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">Python & Fullstack Web Tech</h4>
+                                <p class="text-slate-600 text-sm mb-4 line-clamp-2">Learn coding from scratch! Hands-on projects, Web Apps, algorithms, and technical interview prep.</p>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between pt-4 border-t border-slate-100 mb-4">
+                                    <span class="text-2xl font-extrabold text-slate-900">$299 <span class="text-xs text-slate-400 font-normal line-through">$499</span></span>
+                                    <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded">40% OFF</span>
+                                </div>
+                                <button onclick="openCourseModal(3)" class="w-full py-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold rounded-xl transition-colors">
+                                    View Syllabus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-2">Student Reviews</h2>
+                    <h3 class="text-3xl font-extrabold text-slate-900">What Our Toppers Say</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex text-amber-400 gap-1 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 text-sm italic">"The live doubt clearance sessions and AI mock test series changed my preparation entirely. I cracked JEE Advanced AIR 142 thanks to Apex mentors!"</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-6 mt-4 border-t border-slate-200">
+                            <div class="w-10 h-10 rounded-full bg-brand-500 text-white font-bold flex items-center justify-center">
+                                AR
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">Aarav Sharma</p>
+                                <p class="text-xs text-slate-500">JEE Advanced Ranker '25</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex text-amber-400 gap-1 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 text-sm italic">"Physics used to be my weakest subject until I joined Prof. Verma's class. The 3D visual modules made concepts crystal clear."</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-6 mt-4 border-t border-slate-200">
+                            <div class="w-10 h-10 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center">
+                                PK
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">Priya Kulkarni</p>
+                                <p class="text-xs text-slate-500">NEET Top Scorer (695/720)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex text-amber-400 gap-1 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 text-sm italic">"Foundational Class 10 course boosted my analytical skills. I scored 98.2% in my board exams effortlessly."</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-6 mt-4 border-t border-slate-200">
+                            <div class="w-10 h-10 rounded-full bg-purple-500 text-white font-bold flex items-center justify-center">
+                                RG
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">Rohan Gupta</p>
+                                <p class="text-xs text-slate-500">Class 10 Board Topper</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 2: COURSES PAGE -->
+    <section id="page-courses" class="page-content hidden">
+        <div class="bg-slate-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">Explore Our Comprehensive Programs</h1>
+                <p class="text-slate-400 max-w-2xl text-sm sm:text-base">Filter by stream or search for specific subjects to find the ideal learning path with live instruction and high-quality materials.</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <!-- Search & Filter Header -->
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200 mb-10 space-y-4">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <!-- Search input -->
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="courseSearchInput" oninput="filterCourses()" placeholder="Search course name or keyword..." class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 text-sm">
+                    </div>
+                    <!-- Category Select -->
+                    <div class="w-full md:w-64">
+                        <select id="courseCategorySelect" onchange="filterCourses()" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-700 text-sm font-medium">
+                            <option value="all">All Categories</option>
+                            <option value="jee">JEE Main & Advanced</option>
+                            <option value="neet">NEET Medical</option>
+                            <option value="foundation">Class 8-10 Foundation</option>
+                            <option value="coding">Coding & CS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Category Pills -->
+                <div class="flex flex-wrap gap-2 pt-2">
+                    <button onclick="setCategoryFilter('all')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white">All Courses</button>
+                    <button onclick="setCategoryFilter('jee')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">JEE Prep</button>
+                    <button onclick="setCategoryFilter('neet')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">NEET Medical</button>
+                    <button onclick="setCategoryFilter('foundation')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">Class 9-10</button>
+                    <button onclick="setCategoryFilter('coding')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">Coding</button>
+                </div>
+            </div>
+
+            <!-- Course Cards Grid -->
+            <div id="coursesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Javascript will dynamically render course cards here -->
+            </div>
+            
+            <div id="noCoursesMsg" class="hidden text-center py-16">
+                <i class="fa-solid fa-folder-open text-5xl text-slate-300 mb-4"></i>
+                <h3 class="text-xl font-bold text-slate-700">No courses match your query</h3>
+                <p class="text-slate-500 text-sm">Try clearing filters or search with different keywords.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 3: ABOUT US PAGE -->
+    <section id="page-about" class="page-content hidden">
+        <!-- Hero Banner -->
+        <div class="bg-gradient-to-r from-brand-900 via-indigo-900 to-slate-900 text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Empowering Scholars Worldwide</h1>
+                <p class="text-indigo-200 max-w-2xl mx-auto text-base sm:text-lg">Apex Academy was built with a single mission: to democratize quality education and give every student direct access to top-tier mentorship.</p>
+            </div>
+        </div>
+
+        <!-- Mission, Vision, Values -->
+        <div class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="w-12 h-12 bg-brand-600 text-white rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Our Mission</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">To deliver affordable, structured, and technology-driven coaching that bridges learning gaps and builds confidence in STEM subjects.</p>
+                    </div>
+
+                    <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Our Vision</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">To become the world's most trusted educational ecosystem, nurturing critical thinkers, innovators, and future leaders.</p>
+                    </div>
+
+                    <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Our Core Values</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Uncompromising quality, continuous innovation, student empathy, and absolute integrity in all our educational endeavors.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Faculty Showcase -->
+        <div class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-2">Our Mentors</h2>
+                    <h3 class="text-3xl font-extrabold text-slate-900">Meet Our Master Faculty</h3>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Faculty Card 1 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all text-center p-6">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Dr. Ananya Roy" class="w-24 h-24 rounded-full mx-auto object-cover mb-4 ring-4 ring-brand-100" onerror="this.src='https://placehold.co/300x300/4f46e5/ffffff?text=Dr.+Ananya'">
+                        <h4 class="text-lg font-bold text-slate-900">Dr. Ananya Roy</h4>
+                        <p class="text-xs font-bold text-brand-600 mb-2">Head of Chemistry</p>
+                        <p class="text-xs text-slate-500 mb-4">Ph.D. IIT Bombay • 14+ Yrs Exp</p>
+                        <div class="flex justify-center space-x-3 text-slate-400">
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Faculty Card 2 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all text-center p-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Prof. Rajesh Verma" class="w-24 h-24 rounded-full mx-auto object-cover mb-4 ring-4 ring-brand-100" onerror="this.src='https://placehold.co/300x300/4f46e5/ffffff?text=Prof.+Verma'">
+                        <h4 class="text-lg font-bold text-slate-900">Prof. Rajesh Verma</h4>
+                        <p class="text-xs font-bold text-brand-600 mb-2">Senior Physics Expert</p>
+                        <p class="text-xs text-slate-500 mb-4">M.Tech IIT Delhi • Ex-Allen Faculty</p>
+                        <div class="flex justify-center space-x-3 text-slate-400">
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Faculty Card 3 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all text-center p-6">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Ms. Sunita Sharma" class="w-24 h-24 rounded-full mx-auto object-cover mb-4 ring-4 ring-brand-100" onerror="this.src='https://placehold.co/300x300/4f46e5/ffffff?text=Ms.+Sunita'">
+                        <h4 class="text-lg font-bold text-slate-900">Ms. Sunita Sharma</h4>
+                        <p class="text-xs font-bold text-brand-600 mb-2">Mathematics Chair</p>
+                        <p class="text-xs text-slate-500 mb-4">M.Sc. Mathematics • Gold Medalist</p>
+                        <div class="flex justify-center space-x-3 text-slate-400">
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Faculty Card 4 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all text-center p-6">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Vikramaditya Das" class="w-24 h-24 rounded-full mx-auto object-cover mb-4 ring-4 ring-brand-100" onerror="this.src='https://placehold.co/300x300/4f46e5/ffffff?text=Vikramaditya'">
+                        <h4 class="text-lg font-bold text-slate-900">Vikramaditya Das</h4>
+                        <p class="text-xs font-bold text-brand-600 mb-2">Lead Coding Instructor</p>
+                        <p class="text-xs text-slate-500 mb-4">Ex-Google Engineer • 10+ Yrs Exp</p>
+                        <div class="flex justify-center space-x-3 text-slate-400">
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="hover:text-brand-600"><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Milestones Timeline -->
+        <div class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-3xl font-extrabold text-slate-900 text-center mb-12">Our Journey & Milestones</h3>
+                <div class="relative border-l-2 border-brand-200 ml-4 md:ml-32 space-y-8">
+                    <!-- Event 1 -->
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-2.5 top-1 w-5 h-5 rounded-full bg-brand-600 ring-4 ring-white"></span>
+                        <div class="md:absolute md:-left-36 md:top-1 font-bold text-brand-600 text-sm">2021</div>
+                        <h4 class="font-bold text-slate-900 text-lg">Foundation of Apex Academy</h4>
+                        <p class="text-slate-600 text-sm mt-1">Started as a small tutoring cohort of 50 students with a focus on JEE preparation.</p>
+                    </div>
+                    <!-- Event 2 -->
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-2.5 top-1 w-5 h-5 rounded-full bg-brand-600 ring-4 ring-white"></span>
+                        <div class="md:absolute md:-left-36 md:top-1 font-bold text-brand-600 text-sm">2023</div>
+                        <h4 class="font-bold text-slate-900 text-lg">Digital Portal Launch</h4>
+                        <p class="text-slate-600 text-sm mt-1">Expanded online nationwide, introducing AI-based test analysis and NEET courses.</p>
+                    </div>
+                    <!-- Event 3 -->
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-2.5 top-1 w-5 h-5 rounded-full bg-brand-600 ring-4 ring-white"></span>
+                        <div class="md:absolute md:-left-36 md:top-1 font-bold text-brand-600 text-sm">2025</div>
+                        <h4 class="font-bold text-slate-900 text-lg">15,000+ Students Enrolled</h4>
+                        <p class="text-slate-600 text-sm mt-1">Achieved top rankings across competitive exams and expanded into coding and foundation programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 4: STUDY MATERIAL & RESOURCES PAGE -->
+    <section id="page-resources" class="page-content hidden">
+        <div class="bg-slate-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">Free Study Material & Knowledge Hub</h1>
+                <p class="text-slate-400 max-w-2xl text-sm sm:text-base">Download chapter-wise revision notes, practice previous year papers, and test your knowledge with interactive sample quizzes.</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+            
+            <!-- Downloadable Notes & Question Papers -->
+            <div>
+                <h2 class="text-2xl font-extrabold text-slate-900 mb-6">Popular Study Resources</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- PDF Card 1 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex-shrink-0 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-slate-900 text-base mb-1">Physics Formulas Cheat Sheet</h4>
+                            <p class="text-xs text-slate-500 mb-3">Class 11 & 12 Complete Mechanics & Optics</p>
+                            <button onclick="fakeDownload('Physics_Formulas_Apex.pdf')" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                                <i class="fa-solid fa-download"></i> Download PDF (3.2 MB)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PDF Card 2 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex-shrink-0 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-slate-900 text-base mb-1">JEE Main 2025 Solved PYQs</h4>
+                            <p class="text-xs text-slate-500 mb-3">5-Year Topicwise Question Bank with Hints</p>
+                            <button onclick="fakeDownload('JEE_2025_PYQ_Solved.pdf')" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                                <i class="fa-solid fa-download"></i> Download PDF (8.5 MB)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PDF Card 3 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex-shrink-0 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-slate-900 text-base mb-1">NEET Biology NCERT Mindmaps</h4>
+                            <p class="text-xs text-slate-500 mb-3">High-Yield Visual Notes for Quick Revision</p>
+                            <button onclick="fakeDownload('NEET_Bio_Mindmaps.pdf')" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                                <i class="fa-solid fa-download"></i> Download PDF (5.1 MB)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Quiz Widget -->
+            <div class="bg-gradient-to-br from-indigo-900 to-brand-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl">
+                <div class="max-w-3xl">
+                    <span class="inline-block px-3 py-1 bg-white/10 text-indigo-200 rounded-full text-xs font-bold mb-3 uppercase tracking-wider">Interactive Assessment</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">Sample Knowledge Test</h2>
+                    <p class="text-indigo-200 text-sm mb-6">Test your conceptual understanding with this sample physics challenge question:</p>
+
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 space-y-4">
+                        <p class="font-semibold text-lg text-white">Q: What happens to the capacitance of a parallel plate capacitor if a dielectric slab is inserted between its plates?</p>
+                        
+                        <div id="quizOptions" class="space-y-3 pt-2">
+                            <button onclick="checkAnswer(this, false)" class="quiz-opt w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/20 border border-white/10 transition-colors text-sm font-medium">
+                                A) Capacitance decreases
+                            </button>
+                            <button onclick="checkAnswer(this, true)" class="quiz-opt w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/20 border border-white/10 transition-colors text-sm font-medium">
+                                B) Capacitance increases
+                            </button>
+                            <button onclick="checkAnswer(this, false)" class="quiz-opt w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/20 border border-white/10 transition-colors text-sm font-medium">
+                                C) Capacitance remains strictly unchanged
+                            </button>
+                        </div>
+
+                        <div id="quizFeedback" class="hidden p-4 rounded-xl text-sm font-bold mt-4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div>
+                <h2 class="text-2xl font-extrabold text-slate-900 mb-6 text-center">Frequently Asked Questions</h2>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="border border-slate-200 rounded-2xl bg-white overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 font-bold text-slate-800 flex justify-between items-center focus:outline-none">
+                            <span>How do live interactive classes work?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-ans hidden px-6 pb-4 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            Students log in through our web platform or mobile app at scheduled times. You can ask doubts live, participate in polls, and re-watch recorded video sessions anytime later.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="border border-slate-200 rounded-2xl bg-white overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 font-bold text-slate-800 flex justify-between items-center focus:outline-none">
+                            <span>Can I request a refund if I am not satisfied?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-ans hidden px-6 pb-4 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            Yes! We offer a 7-day money-back guarantee for all full-year enrolled courses with zero questions asked.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="border border-slate-200 rounded-2xl bg-white overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 font-bold text-slate-800 flex justify-between items-center focus:outline-none">
+                            <span>Are physical study books provided?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-ans hidden px-6 pb-4 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            Comprehensive digital PDFs are included for all courses. Premium package subscribers also receive printed workbook modules shipped straight to their doorstep.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 5: CONTACT US PAGE -->
+    <section id="page-contact" class="page-content hidden">
+        <div class="bg-slate-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">Get In Touch With Us</h1>
+                <p class="text-slate-400 max-w-2xl text-sm sm:text-base">Have questions about admissions, course details, or career guidance? Our team is here to assist you.</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Contact Info & Map Details -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-6">Headquarters & Support</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Main Campus Address</h4>
+                                    <p class="text-slate-600 text-sm">Apex Learning Tower, Knowledge Park II, Tech Hub Area, Sector 62, New Delhi NCR, 201301</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Phone & Helpline</h4>
+                                    <p class="text-slate-600 text-sm">+91 (1800) 123-4567 / +91 98765 43210</p>
+                                    <p class="text-xs text-slate-400">Mon - Sat: 9:00 AM - 8:00 PM</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Email Inquiries</h4>
+                                    <p class="text-slate-600 text-sm">admissions@apexacademy.edu</p>
+                                    <p class="text-slate-600 text-sm">support@apexacademy.edu</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Map Placeholder Graphic -->
+                    <div class="bg-slate-200 rounded-2xl h-64 relative overflow-hidden flex items-center justify-center border border-slate-300">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60" alt="Map graphic" onerror="this.src='https://placehold.co/600x300/e2e8f0/475569?text=Map+Location'">
+                        <div class="absolute bg-white px-4 py-2 rounded-xl shadow-lg border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-800">
+                            <i class="fa-solid fa-location-dot text-red-500 text-base"></i> Apex Academy Campus
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Send Us a Message</h3>
+                    <p class="text-slate-500 text-sm mb-6">Fill out the form below and our counselor will call you within 24 hours.</p>
+
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Full Name *</label>
+                                <input type="text" required placeholder="e.g. Rahul Verma" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Phone Number *</label>
+                                <input type="tel" required placeholder="+91 98765 43210" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Email Address *</label>
+                            <input type="email" required placeholder="name@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Interested Target Course</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm text-slate-700">
+                                <option>IIT-JEE Main & Advanced</option>
+                                <option>NEET UG Medical</option>
+                                <option>Class 9-10 Foundation</option>
+                                <option>Python & Fullstack Coding</option>
+                                <option>General Inquiry</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Message / Questions</label>
+                            <textarea rows="4" required placeholder="Tell us about your learning goals..." class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition-all">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER (SHARED ON ALL PAGES) -->
+<footer class="bg-slate-900 text-slate-400 text-sm pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+            <!-- Col 1: Brand Info -->
+            <div class="lg:col-span-2 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white text-xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold text-white">Apex Academy</span>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+                    Apex Academy is a premier online coaching platform committed to providing high-quality interactive education, personal mentorship, and structured exam preparation.
+                </p>
+                <div class="flex space-x-3 pt-2">
+                    <a href="https://facebook.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Col 2: Quick Links -->
+            <div class="space-y-3">
+                <h4 class="text-white font-bold text-base">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><button onclick="switchPage('home')" class="hover:text-white transition-colors">Home</button></li>
+                    <li><button onclick="switchPage('courses')" class="hover:text-white transition-colors">All Courses</button></li>
+                    <li><button onclick="switchPage('about')" class="hover:text-white transition-colors">About Us</button></li>
+                    <li><button onclick="switchPage('resources')" class="hover:text-white transition-colors">Study Material</button></li>
+                    <li><button onclick="switchPage('contact')" class="hover:text-white transition-colors">Contact Us</button></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Popular Courses -->
+            <div class="space-y-3">
+                <h4 class="text-white font-bold text-base">Popular Programs</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="switchPage('courses')" class="hover:text-white transition-colors">IIT-JEE Mains & Adv</a></li>
+                    <li><a href="#" onclick="switchPage('courses')" class="hover:text-white transition-colors">NEET Medical Batch</a></li>
+                    <li><a href="#" onclick="switchPage('courses')" class="hover:text-white transition-colors">Class 10 Board Master</a></li>
+                    <li><a href="#" onclick="switchPage('courses')" class="hover:text-white transition-colors">Python Coding Bootcamp</a></li>
+                    <li><a href="#" onclick="switchPage('courses')" class="hover:text-white transition-colors">Olympiad Prep</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Newsletter -->
+            <div class="space-y-3">
+                <h4 class="text-white font-bold text-base">Stay Updated</h4>
+                <p class="text-xs text-slate-400">Subscribe for free exam updates and study tip alerts.</p>
+                <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                    <input type="email" required placeholder="Enter your email" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs">
+                    <button type="submit" class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-xs transition-colors">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <p>&copy; 2026 Apex Academy. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <a href="#" class="hover:underline">Terms of Service</a>
+                <a href="#" class="hover:underline">Refund Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- MODAL: FREE TRIAL BOOKING -->
+<div id="demoModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl animate-fade-in">
+        <button onclick="closeModal('demoModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2">
+            <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+        <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h3 class="text-2xl font-extrabold text-slate-900">Book Your Free Trial</h3>
+            <p class="text-xs text-slate-500 mt-1">Experience 3 live interactive classes at zero cost!</p>
+        </div>
+
+        <form onsubmit="handleDemoSubmit(event)" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Student Name</label>
+                <input type="text" required placeholder="Enter student's name" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Mobile Phone Number</label>
+                <input type="tel" required placeholder="+91 98765 43210" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Target Exam / Goal</label>
+                <select class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option>IIT-JEE Main / Advanced</option>
+                    <option>NEET UG Medical</option>
+                    <option>Class 8-10 Foundation</option>
+                    <option>Coding / Computer Science</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition-all">
+                Confirm Trial Registration
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL: COURSE SYLLABUS DETAIL -->
+<div id="courseModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl">
+        <button onclick="closeModal('courseModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2">
+            <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+
+        <div id="courseModalContent">
+            <!-- Dynamic course detail content rendered by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- TOAST NOTIFICATION CONTAINER -->
+<div id="toast" class="fixed bottom-5 right-5 z-50 hidden bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-xl"></i>
+    <span id="toastMsg" class="text-sm font-medium">Action completed successfully!</span>
+</div>
+
+<!-- JAVASCRIPT LOGIC -->
+<script>
+    // Comprehensive Course Database
+    const coursesData = [
+        {
+            id: 1,
+            category: 'jee',
+            title: 'IIT-JEE Main & Advanced Complete Mastery 2026',
+            badge: 'Competitive Exam',
+            image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80',
+            duration: '1 Year Program',
+            rating: '4.9',
+            reviews: '1.2k',
+            price: '$499',
+            origPrice: '$799',
+            description: 'In-depth video lectures, problem solving strategies, and weekly tests covering Class 11 and 12 PCM syllabus.',
+            instructor: 'Prof. Rajesh Verma (IIT Delhi)',
+            modules: ['Mechanics & Thermodynamics', 'Calculus & Algebra', 'Organic & Physical Chemistry', '100+ Mock Tests & PYQs']
+        },
+        {
+            id: 2,
+            category: 'neet',
+            title: 'NEET UG Medical Pinnacle Program',
+            badge: 'Medical Entrance',
+            image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+            duration: '2 Years Program',
+            rating: '4.8',
+            reviews: '980',
+            price: '$599',
+            origPrice: '$899',
+            description: 'NCERT centric interactive lectures for Physics, Chemistry, and Botany/Zoology with 3D anatomical models.',
+            instructor: 'Dr. Ananya Roy (Ph.D. IIT Bombay)',
+            modules: ['Human Physiology & Genetics', 'Organic Chemistry Reactions', 'Electrodynamics & Optics', 'NCERT Word-by-Word Breakdown']
+        },
+        {
+            id: 3,
+            category: 'coding',
+            title: 'Python & Fullstack Software Engineering',
+            badge: 'Coding & CS',
+            image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80',
+            duration: '6 Months',
+            rating: '4.95',
+            reviews: '2.1k',
+            price: '$299',
+            origPrice: '$499',
+            description: 'Learn modern Web Development, HTML/CSS, JavaScript, Python backends, APIs, and Data Structures.',
+            instructor: 'Vikramaditya Das (Ex-Google)',
+            modules: ['HTML5, CSS3 & Tailwind', 'JavaScript & DOM Manipulation', 'Python Core & Django Framework', 'Git, Portfolio & Project Deployment']
+        },
+        {
+            id: 4,
+            category: 'foundation',
+            title: 'Class 10 Board Exam Champion Batch',
+            badge: 'Foundation',
+            image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80',
+            duration: '1 Year',
+            rating: '4.9',
+            reviews: '750',
+            price: '$199',
+            origPrice: '$349',
+            description: 'Strengthen Science, Maths, and Social Science fundamentals with sample papers and board strategy.',
+            instructor: 'Ms. Sunita Sharma',
+            modules: ['Maths NCERT Exemplar Solutions', 'Physics & Chemistry Concepts', 'Board Mock Examinations', 'Answer Writing Techniques']
+        },
+        {
+            id: 5,
+            category: 'foundation',
+            title: 'Class 9 STEM Foundation & Olympiad',
+            badge: 'Foundation',
+            image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80',
+            duration: '1 Year',
+            rating: '4.7',
+            reviews: '520',
+            price: '$179',
+            origPrice: '$299',
+            description: 'Build a solid base for future competitive exams like NTSE, Olympiads, and JEE/NEET.',
+            instructor: 'Apex Expert Faculty',
+            modules: ['Advanced Mathematics', 'Conceptual Physics', 'Logical Reasoning', 'Olympiad Practice Worksheets']
+        },
+        {
+            id: 6,
+            category: 'jee',
+            title: 'JEE Crash Course & Test Series 2026',
+            badge: 'Fast-Track',
+            image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
+            duration: '3 Months',
+            rating: '4.85',
+            reviews: '1.5k',
+            price: '$149',
+            origPrice: '$299',
+            description: 'Intensive revision cohort with daily live problem solving, formula speed runs, and 30 full-length tests.',
+            instructor: 'Prof. Rajesh Verma',
+            modules: ['High-Weightage Topic Revision', 'Time-Management Strategies', 'Error Analysis Sessions', 'Predicted Question Papers']
+        }
+    ];
+
+    // Navigation & SPA Logic
+    function switchPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+        
+        // Show selected page
+        const targetPage = document.getElementById(`page-${pageId}`);
+        if(targetPage) {
+            targetPage.classList.remove('hidden');
+        }
+
+        // Update Desktop Nav Active States
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active-tab'));
+        const activeNavBtn = document.getElementById(`nav-${pageId}`);
+        if(activeNavBtn) activeNavBtn.classList.add('active-tab');
+
+        // Update Mobile Nav Active States
+        document.querySelectorAll('.mob-nav-btn').forEach(btn => btn.classList.remove('mobile-active-tab'));
+        const activeMobBtn = document.getElementById(`mob-nav-${pageId}`);
+        if(activeMobBtn) activeMobBtn.classList.add('mobile-active-tab');
+
+        // Scroll smooth to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // If switched to courses, ensure initial render
+        if(pageId === 'courses') {
+            renderCourses(coursesData);
+        }
+    }
+
+    // Toggle Mobile Navigation
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    }
+
+    // Render Courses in Grid
+    function renderCourses(list) {
+        const container = document.getElementById('coursesGrid');
+        const noMsg = document.getElementById('noCoursesMsg');
+        
+        if(!container) return;
+        container.innerHTML = '';
+
+        if(list.length === 0) {
+            noMsg.classList.remove('hidden');
+            return;
+        } else {
+            noMsg.classList.add('hidden');
+        }
+
+        list.forEach(course => {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col';
+            card.innerHTML = `
+                <div class="relative h-48 bg-slate-200">
+                    <img src="${course.image}" alt="${course.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/4f46e5/ffffff?text=${encodeURIComponent(course.title)}'">
+                    <span class="absolute top-3 left-3 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">${course.badge}</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center text-xs text-slate-500 mb-2">
+                            <span><i class="fa-regular fa-clock text-brand-600 mr-1"></i> ${course.duration}</span>
+                            <span class="text-amber-500 font-bold"><i class="fa-solid fa-star mr-1"></i> ${course.rating} (${course.reviews})</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-2 leading-snug">${course.title}</h4>
+                        <p class="text-slate-600 text-xs mb-4 line-clamp-2">${course.description}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 mb-4">
+                            <span class="text-2xl font-extrabold text-slate-900">${course.price} <span class="text-xs text-slate-400 font-normal line-through">${course.origPrice}</span></span>
+                            <span class="text-xs font-medium text-slate-500"><i class="fa-solid fa-chalkboard-user mr-1"></i> ${course.instructor.split(' ')[0]}</span>
+                        </div>
+                        <button onclick="openCourseModal(${course.id})" class="w-full py-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold text-sm rounded-xl transition-colors">
+                            View Syllabus
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // Filter Courses JS
+    function filterCourses() {
+        const query = document.getElementById('courseSearchInput').value.toLowerCase();
+        const category = document.getElementById('courseCategorySelect').value;
+
+        const filtered = coursesData.filter(course => {
+            const matchesSearch = course.title.toLowerCase().includes(query) || course.description.toLowerCase().includes(query);
+            const matchesCategory = category === 'all' || course.category === category;
+            return matchesSearch && matchesCategory;
+        });
+
+        renderCourses(filtered);
+    }
+
+    function setCategoryFilter(cat) {
+        document.getElementById('courseCategorySelect').value = cat;
+        // Highlight active pill styling
+        document.querySelectorAll('.cat-pill').forEach(btn => {
+            btn.className = 'cat-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200';
+        });
+        event.target.className = 'cat-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white';
+        filterCourses();
+    }
+
+    // Modal Handlers
+    function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+    }
+
+    function openCourseModal(courseId) {
+        const course = coursesData.find(c => c.id === courseId);
+        if(!course) return;
+
+        const content = document.getElementById('courseModalContent');
+        content.innerHTML = `
+            <span class="inline-block bg-brand-100 text-brand-700 text-xs font-bold px-3 py-1 rounded-full mb-3">${course.badge}</span>
+            <h3 class="text-2xl font-extrabold text-slate-900 mb-2">${course.title}</h3>
+            <p class="text-xs text-slate-500 mb-4"><i class="fa-solid fa-user-tie text-brand-600 mr-1"></i> Instructor: ${course.instructor}</p>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">${course.description}</p>
+            
+            <h4 class="font-bold text-slate-900 text-sm mb-3">Syllabus Highlights & Modules:</h4>
+            <div class="space-y-2 mb-6">
+                ${course.modules.map(mod => `
+                    <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs font-medium text-slate-700">
+                        <i class="fa-solid fa-circle-check text-emerald-500 text-base"></i>
+                        <span>${mod}</span>
+                    </div>
+                `).join('')}
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-slate-200">
+                <div>
+                    <span class="text-xs text-slate-400 block">Total Tuition Fee</span>
+                    <span class="text-2xl font-extrabold text-slate-900">${course.price}</span>
+                </div>
+                <button onclick="closeModal('courseModal'); openModal('demoModal');" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm transition-colors">
+                    Enroll Now / Get Demo
+                </button>
+            </div>
+        `;
+
+        openModal('courseModal');
+    }
+
+    // Interactive Quiz Handler
+    function checkAnswer(btn, isCorrect) {
+        const feedback = document.getElementById('quizFeedback');
+        const allBtns = document.querySelectorAll('.quiz-opt');
+        
+        allBtns.forEach(b => b.classList.add('opacity-50', 'pointer-events-none'));
+        
+        feedback.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-200', 'bg-red-500/20', 'text-red-200');
+        
+        if(isCorrect) {
+            btn.classList.remove('opacity-50', 'bg-white/5');
+            btn.classList.add('bg-emerald-600', 'text-white');
+            feedback.classList.add('bg-emerald-500/20', 'text-emerald-200');
+            feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Correct! A dielectric material increases the capacitance by factor K (C = K * C0).';
+        } else {
+            btn.classList.remove('opacity-50', 'bg-white/5');
+            btn.classList.add('bg-red-600', 'text-white');
+            feedback.classList.add('bg-red-500/20', 'text-red-200');
+            feedback.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-2"></i> Incorrect. Inserting a dielectric slab always increases the total capacitance!';
+        }
+    }
+
+    // FAQ Accordion Toggle
+    function toggleFaq(btn) {
+        const answer = btn.nextElementSibling;
+        const icon = btn.querySelector('i');
+        
+        if(answer.classList.contains('hidden')) {
+            answer.classList.remove('hidden');
+            icon.classList.add('rotate-180');
+        } else {
+            answer.classList.add('hidden');
+            icon.classList.remove('rotate-180');
+        }
+    }
+
+    // Fake Download trigger
+    function fakeDownload(fileName) {
+        showToast(`Downloading ${fileName}...`);
+    }
+
+    // Toast Notification logic
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        toastMsg.innerText = message;
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3500);
+    }
+
+    // Form Submit Handlers
+    function handleDemoSubmit(e) {
+        e.preventDefault();
+        closeModal('demoModal');
+        showToast("🎉 Free Trial Booked! Our team will contact you shortly.");
+        e.target.reset();
+    }
+
+    function handleContactSubmit(e) {
+        e.preventDefault();
+        showToast("✉️ Inquiry submitted! We'll reply within 24 hours.");
+        e.target.reset();
+    }
+
+    function handleNewsletter(e) {
+        e.preventDefault();
+        showToast("👍 Thank you for subscribing to Apex updates!");
+        e.target.reset();
+    }
+
+    // Initialize default page state on window load
+    window.onload = function() {
+        switchPage('home');
+    }
+</script>
+
+</body>
+</html>

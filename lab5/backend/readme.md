@@ -36,3 +36,8 @@ app.get("/", (req, res) => {
 app.listen(4444, () => console.log("prg1 is running at 4444"));
 
 ```
+
+## STATIC INPORT 
+IN EXPRESS WE CAN ADD ANY STATIC HTML PAGES WITH THW HELP OF EXPRESS.STATIC METHOD
+
+Express support middle ware , when we have to execute some functions before server execution then we use middle ware app.use always appplied to insert any middle ware
